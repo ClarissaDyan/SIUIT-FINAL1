@@ -2,6 +2,8 @@ import express from 'express';
 import { registerAccount, loginAccount, updateAccount, deleteAccount, authenticate, logoutAccount } from '../controller/AccountController.js';
 import { createIncome, getIncomeById } from '../controller/IncomeController.js';
 import { updateIncome } from '../controller/IncomeController.js';
+import { deleteIncome } from '../controller/IncomeController.js';
+
 const router = express.Router();
 
 // Public routes

@@ -20,3 +20,16 @@ export const createIncome = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const getIncomeById = async (req, res) => {
+    try {
+        const income = await Income.findById(req.params.id);
+        if (!income) {
+            return res.status(400).json({ message: 'Income not found' });
+        }
+        res.status(200).json({ income });
+    } catch (error) {
+        res.statuc(500).json({ message: error.message});
+    }
+};
+

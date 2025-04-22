@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Georgia', serif;
+                background-color: #022B2F;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .login-container {
+                background-color: #d3d9e3;
+                padding: 2.5rem 3rem;
+                border-radius: 12px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                width: 350px;
+            }
+
+            .login-container h2 {
+                margin-bottom: 1.5rem;
+                text-align: center;
+                color: #2c3e50;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: #37474f;
+                font-size: 1.1rem;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 0.75rem;
+                border: none;
+                border-radius: 6px;
+                background-color: #f2f4f7;
+                font-size: 1rem;
+            }
+
+            .form-group input:focus {
+                outline: none;
+                background-color: #e8ebf0;
+            }
+
+            .login-button {
+                display: block;
+                width: 100%;
+                padding: 0.75rem;
+                background-color: #76c7b5;
+                color: white;
+                font-size: 1.5rem;
+                font-family: 'Georgia', serif;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                transition: 0.3s ease;
+                margin-left: 0px;
+            }
+
+            .login-button:hover {
+                background-color: #66b7a2;
+            }
+        </style>
+</head>
+
+<body>
+    <main>
+        <div class="login-container">
+            <form action="/api/login" method="POST">
+                <% if (typeof error !=='undefined' ) { %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                    <% } %>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-button">Masuk</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

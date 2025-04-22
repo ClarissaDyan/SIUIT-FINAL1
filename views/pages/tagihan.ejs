@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+    
+<body>
+    <div class="container mt-5">
+        <h3>Pencatatan Tagihan</h3>
+
+        <!-- Form Input Tagihan-->
+        <div class="card mb-4">
+            <div class="card-header">
+                Tambah Tagihan Bulan Ini
+            </div>
+            <div class="card-body">
+                <form id="tagihan-form">
+                    <input type="hidden" id="tagihan-id" name="id">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="nama" class="form-label">Nama Tagihan</label>
+                            <input type="text" class="form-control" id="nama" name="nama" min="0" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="jumlah" class="form-label">Jumlah Tagihan</label>
+                            <input type="number" class="form-control" id="jumlah" name="jumlah" min="0" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="tanggal" class="form-label">Tanggal Jatuh Tempo</label>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">
+                        Simpan
+                    </button>
+                </form>
+            </div>
+        </div>
+    
+    <!-- Filter Data -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Filter Data
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
+                    <form action="/filter" method="GET" class="d-flex mb-4">
+                        <input type="date" name="startDate" class="form-control me-2" required>
+                        <input type="date" name="endDate" class="form-control me-2" required>
+                        <button type="submit" class="btn btn-primary">Cari</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabel Daftar Tagihan -->
+    <div class="card">
+        <div class="card-header">
+            Daftar Tagihan
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama Tagihan</th>
+                            <th>Jumlah Tagihan</th>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <%- include('../partials/footer copy.ejs'); %>
+</footer>
+</body>
+
+</html>

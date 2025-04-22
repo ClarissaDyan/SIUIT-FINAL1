@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+    <style>
+      .error-container {
+        text-align: center;
+        padding: 100px 20px;
+      }
+
+      .error-container h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      .error-container p {
+        font-size: 20px;
+        margin-bottom: 30px;
+      }
+
+      .back-button {
+        padding: 10px 20px;
+        background-color: #1F5A48;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .back-button:hover {
+        background-color: #258062;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="error-container">
+    <h1>Oops!</h1>
+    <p>
+      <%= message %>
+    </p>
+    <a href="/" class="back-button">Kembali ke Beranda</a>
+  </div>
+</body>
+
+</html>

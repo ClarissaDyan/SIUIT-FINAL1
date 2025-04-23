@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+    
+<body>
+    <div class="container mt-5">
+        <h3>Pencatatan Cicilan</h3>
+
+        <!-- Form Input Cicilan-->
+        <div class="card mb-4">
+            <div class="card-header">
+                Tambah Cicilan
+            </div>
+            <div class="card-body">
+                <form id="cicilan-form" action="/api/instalment" method="POST">
+                    <input type="hidden" id="cicilan-id" name="id">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="nama" class="form-label">Nama Cicilan</label>
+                            <input type="text" class="form-control" id="nama" name="nama" min="0" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="tenor" class="form-label">Tenor</label>
+                            <input type="number" class="form-control" id="tenor" name="tenor" min="0" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="total" class="form-label">Total Cicilan</label>
+                            <input type="number" class="form-control" id="total" name="total" min="0" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="tanggal" class="form-label">Tanggal Jatuh Tempo</label>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">
+                        Simpan
+                    </button>
+                </form>
+            </div>
+        </div>
+    
+    <!-- Filter Data -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Filter Data
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="filter-nama" class="form-label">Nama Cicilan</label>
+                    <input type="text" name="nama" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
+                    <form action="/filter" method="GET" class="d-flex mb-4">
+                        <input type="date" name="startDate" class="form-control me-2" required>
+                        <input type="date" name="endDate" class="form-control me-2" required>
+                        
+                    </form>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </div>
+    </div>
+
+    <!-- Tabel Daftar Cicilan -->
+    <div class="card">
+        <div class="card-header">
+            Daftar Cicilan
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama Cicilan</th>
+                            <th>Tenor</th>
+                            <th>Jumlah Cicilan per Bulan</th>
+                            <th>Tanggal Jatuh Tempo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% instalments.forEach(instalment=> { %>
+                            <tr>
+                                <td>
+                                    <%= instalment.name %>
+                                </td>
+                                <td>
+                                    <%= instalment.tenor %>
+                                </td>
+                                <td>
+                                    <%= instalment.amount %>
+                                </td>
+                                <td>
+                                    <%= instalment.date.toDateString() %>
+                                </td>
+                                </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <%- include('../partials/footer copy.ejs'); %>
+</footer>
+</body>
+
+</html>

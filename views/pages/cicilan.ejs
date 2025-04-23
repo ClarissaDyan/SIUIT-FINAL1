@@ -19,20 +19,20 @@
                     <input type="hidden" id="cicilan-id" name="id">
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="nama" class="form-label">Nama Cicilan</label>
-                            <input type="text" class="form-control" id="nama" name="nama" min="0" required>
+                            <label for="name" class="form-label">Nama Cicilan</label>
+                            <input type="text" class="form-control" name="name" min="0" required>
                         </div>
                         <div class="col-md-3">
                             <label for="tenor" class="form-label">Tenor</label>
-                            <input type="number" class="form-control" id="tenor" name="tenor" min="0" required>
+                            <input type="number" class="form-control" name="tenor" min="0" required>
                         </div>
                         <div class="col-md-3">
-                            <label for="total" class="form-label">Total Cicilan</label>
-                            <input type="number" class="form-control" id="total" name="total" min="0" required>
+                            <label for="amount" class="form-label">Total Cicilan</label>
+                            <input type="number" class="form-control" name="amount" min="0" required>
                         </div>
                         <div class="col-md-3">
-                            <label for="tanggal" class="form-label">Tanggal Jatuh Tempo</label>
-                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                            <label for="date" class="form-label">Tanggal Jatuh Tempo</label>
+                            <input type="date" class="form-control" name="date" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">
@@ -87,17 +87,22 @@
                             <tr>
                                 <td>
                                     <%= instalment.name %>
-                                </td>
+                                </td> 
                                 <td>
                                     <%= instalment.tenor %>
                                 </td>
                                 <td>
                                     <%= instalment.amount %>
                                 </td>
+
                                 <td>
-                                    <%= instalment.date.toDateString() %>
+                                    <%= instalment.date.toLocaleDateString() %>
                                 </td>
-                                </tr>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" onclick="editInstalment('<%= instalment._id %>')">Edit</button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteInstalment('<%= instalment._id %>')">Hapus</button>
+                                </td>
+                            </tr>
                         <% }) %>
                     </tbody>
                 </table>
@@ -107,7 +112,7 @@
 </div>
 
 <footer>
-    <%- include('../partials/footer copy.ejs'); %>
+    <%- include('../partials/footer.ejs'); %>
 </footer>
 </body>
 

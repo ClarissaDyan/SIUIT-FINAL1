@@ -12,7 +12,7 @@ import { updateInvoice } from '../controller/InvoiceController.js';
 import { deleteInvoice } from '../controller/InvoiceController.js';
 // import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
-//invoice expenditure
+//expenditure route
 import { createExpenditure } from '../controller/ExpenditureController.js';
 import { updateExpenditure } from '../controller/ExpenditureController.js';
 import { deleteExpenditure } from '../controller/ExpenditureController.js';
@@ -55,7 +55,7 @@ router.delete('/expenditure/:id', authenticate, deleteExpenditure);
 
 //instalment routes
 router.post('/instalment', authenticate, createInstalment);
-router.get('/instalment/:id', authenticate, getInstalmentsByAccount);
+// router.get('/instalment/:id', authenticate, getInstalmentsByAccount);
 router.put('/instalment/:id', authenticate, updateInstalment);
 router.delete('/instalment/:id', authenticate, deleteInstalment);
 

@@ -19,15 +19,15 @@
                     <div class="row">
                         <div class="col-md-3">
                             <label for="nama" class="form-label">Nama Tagihan</label>
-                            <input type="text" class="form-control" id="nama" name="nama" min="0" required>
+                            <input type="text" class="form-control"name="name" required>
                         </div>
                         <div class="col-md-3">
                             <label for="jumlah" class="form-label">Jumlah Tagihan</label>
-                            <input type="number" class="form-control" id="jumlah" name="jumlah" min="0" required>
+                            <input type="number" class="form-control"name="amount" required>
                         </div>
                         <div class="col-md-3">
                             <label for="tanggal" class="form-label">Tanggal Jatuh Tempo</label>
-                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                            <input type="date" class="form-control"name="date" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">
@@ -78,14 +78,14 @@
                                 <%= invoice.name %>
                             </td>
                             <td>
-                                <%= income.amount %>
+                                <%= invoice.amount %>
                             </td>
                             <td>
-                                <%= income.date.toLocaleDateString() %>
+                                <%= invoice.date.toLocaleDateString() %>
                             </td>
                             <td>
-                                <button class="btn btn-warning btn-sm" onclick="editIncome('<%= income._id %>')">Edit</button>
-                                <button class="btn btn-danger btn-sm" onclick="deleteIncome('<%= income._id %>')">Hapus</button>
+                                <button class="btn btn-warning btn-sm" onclick="editInvoice('<%= invoice._id %>')">Edit</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteInvoice('<%= invoice._id %>')">Hapus</button>
                             </td>
                         </tr>
                         <% }) %>
@@ -109,7 +109,7 @@
                     <input type="hidden" id="edit-id">
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="edit-nama" required>
+                        <input type="text" class="form-control" id="edit-name" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jumlah</label>
@@ -145,7 +145,7 @@
                 document.getElementById('edit-id').value = data.invoice._id;
                 document.getElementById('edit-name').value = data.invoice.name;
                 document.getElementById('edit-amount').value = data.invoice.amount;
-                document.getElementById('edit-date').value = data.invoicee.date.split('T')[0];
+                document.getElementById('edit-date').value = data.invoice.date.split('T')[0];
                 new bootstrap.Modal(document.getElementById('editModal')).show();
             });
     }

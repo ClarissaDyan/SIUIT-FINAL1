@@ -15,8 +15,7 @@
                 Tambah Tagihan Bulan Ini
             </div>
             <div class="card-body">
-                <form id="tagihan-form">
-                    <input type="hidden" id="tagihan-id" name="id">
+                <form id="tagihan-formaction=" action ="/api/invoice" method="POST">
                     <div class="row">
                         <div class="col-md-3">
                             <label for="nama" class="form-label">Nama Tagihan</label>
@@ -73,12 +72,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <% invoices.forEach(invoice=> { %>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <%= invoice.name %>
+                            </td>
+                            <td>
+                                <%= income.amount %>
+                            </td>
+                            <td>
+                                <%= income.date.toLocaleDateString() %>
+                            </td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" onclick="editIncome('<%= income._id %>')">Edit</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteIncome('<%= income._id %>')">Hapus</button>
+                            </td>
                         </tr>
+                        <% }) %>
                     </tbody>
                 </table>
             </div>
@@ -86,9 +96,91 @@
     </div>
 </div>
 
+ <!-- Modal Edit -->
+ <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Tagihan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="mb-3">
+                        <label class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="edit-nama" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Jumlah</label>
+                        <input type="number" class="form-control" id="edit-amount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tanggal</label>
+                        <input type="date" class="form-control" id="edit-date" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" onclick="updateInvoice()">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <footer>
     <%- include('../partials/footer.ejs'); %>
 </footer>
+<!-- JavaScript untuk Edit dan Delete -->
+<script>
+    let currentId = '';
+
+    function editInvoice(id) {
+        currentId = id;
+        fetch(`/api/invoice/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('edit-id').value = data.invoice._id;
+                document.getElementById('edit-name').value = data.invoice.name;
+                document.getElementById('edit-amount').value = data.invoice.amount;
+                document.getElementById('edit-date').value = data.invoicee.date.split('T')[0];
+                new bootstrap.Modal(document.getElementById('editModal')).show();
+            });
+    }
+
+    function updateInvoice() {
+        const data = {
+            name: document.getElementById('edit-name').value,
+            amount: document.getElementById('edit-amount').value,
+            date: document.getElementById('edit-date').value,
+        };
+
+        fetch(`/api/invoice/${currentId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(() => {
+                window.location.reload();
+            });
+    }
+
+    function deleteInvoice(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+            fetch(`/api/invoice/${id}`, {
+                method: 'DELETE'
+            })
+                .then(() => {
+                    window.location.reload();
+                });
+        }
+    }
+</script>
 </body>
 
 </html>

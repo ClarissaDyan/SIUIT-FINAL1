@@ -54,26 +54,27 @@
             </div>
         </div>
     
-    <!-- Filter Data -->
-    <div class="card mb-4">
-        <div class="card-header">
-            Filter Data
+   <!-- Filter Data -->
+   <div class="card mb-4">
+    <div class="card-header">
+        Filter Data
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
+                <form id="filter-form" action="/filter" method="GET" class="d-flex mb-4">
+                    <input type="date" id="filter-startDate" class="form-control me-2" required>
+                    <input type="date" id="filter-endDate" class="form-control" required>
+                </form>
+            </div>
+           
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
-                    <form action="/filter" method="GET" class="d-flex mb-4">
-                        <input type="date" name="startDate" class="form-control me-2" required>
-                        <input type="date" name="endDate" class="form-control me-2" required>
-                        <button type="submit" class="btn btn-primary">Cari</button>
-                    </form>
-                </div>
+                <button type="submit" class="btn btn-primary" onclick="filterInvoice()">Cari</button>
+                <button type="button" class="btn btn-secondary ms-2" onclick="resetInvoice()">Reset</button>
             </div>
         </div>
-    </div>
-
-    <!-- Tabel Daftar Tagihan -->
+     <!-- Tabel Daftar Tagihan -->
     <div class="card">
         <div class="card-header">
             Daftar Tagihan
@@ -197,6 +198,31 @@
                 });
         }
     }
+    function filterInvoice() {
+        const start = new Date(document.getElementById('filter-startDate').value); 
+        const end = new Date(document.getElementById('filter-endDate').value);
+
+        document.querySelectorAll('tbody tr').forEach(row => {
+            const dateText = row.children[2].textContent.trim();
+            const [day, month, year] = dateText.split('/');
+            const rowDate = new Date(`${year}-${month}-${day}`);
+
+            if (rowDate >= start && rowDate <= end) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    function resetInvoice() {
+        document.getElementById('filter-startDate').value = '';
+        document.getElementById('filter-endDate').value = '';
+
+        const rows = document.querySelectorAll('table tbody tr');
+        rows.forEach(row => row.style.display = '');
+    }
+
 </script>
 </body>
 

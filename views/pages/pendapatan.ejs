@@ -16,7 +16,20 @@
         cursor: pointer;
         text-decoration: none;
         transition: 0.3s ease;
-      }
+    }
+        .logout-button {
+        position: absolute;
+        top: 20px;
+        right: 120px;
+        padding: 10px 20px;
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s ease;
+    }
     </style>
 </head>
 
@@ -25,6 +38,9 @@
         <h3>Manajemen Pendapatan</h3>
 
         <a href="/menu" class="menu-button"> MENU </a>
+        <a href="/api/logout" class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
 
         <!-- Form Input Pendapatan -->
         <div class="card mb-4">

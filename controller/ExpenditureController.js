@@ -18,22 +18,6 @@ export const createExpenditure = async (req, res) => {
   }
 };
 
-export const getExpendituresByAccount = async (req, res) => {
-  try {
-    const accountExists = await Account.findById(account);
-    if (!accountExists) {
-      return res.status(400).json({ message: 'Account not found' });
-    }
-    const expenditures = await Expenditure.find({ account: req.params.id });
-    if (!expenditures) {
-      return res.status(400).json({ message: 'No expenditures found' });
-    }
-    res.status(200).json({ expenditures });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 export const getExpenditureById = async (req, res) => {
   try {
     const expenditure = await Expenditure.findById(req.params.id);

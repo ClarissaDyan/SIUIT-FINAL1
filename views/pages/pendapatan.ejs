@@ -32,23 +32,23 @@
                 Tambah Pendapatan Baru
             </div>
             <div class="card-body">
-                <form id="pendapatan-form" action="/api/income" method="POST">
+                <form id="pendapatan-form">
                     <div class="row">
                         <div class="col-md-3">
                             <label for="amount" class="form-label">Jumlah Pendapatan</label>
-                            <input type="number" class="form-control" name="amount" required>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                         <div class="col-md-3">
                             <label for="date" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" name="date" required>
+                            <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                         <div class="col-md-3">
                             <label for="description" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" name="description" required>
+                            <input type="text" class="form-control" id="description" name="description" required>
                             </div>
                             <div class="col-md-3">
                                 <label for="category" class="form-label">Kategori</label>
-                                <select class="form-select" name="category" required>
+                                <select class="form-select" id="category" name="category" required>
                                 <option value="" disabled selected>Pilih Kategori</option>
                                 <option value="makanan">Makanan</option>
                                 <option value="transportasi">Transportasi</option>
@@ -106,11 +106,10 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Deskripsi</th>
-                                <th>Jumlah</th>
+                                <th>Sumber Pendapatan</th>
+                                <th>Jumlah Pendapatan</th>
                                 <th>Kategori</th>
                                 <th>Tanggal</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -184,6 +183,32 @@
 <!-- JavaScript untuk Edit dan Delete -->
 <script>
     let currentId = '';
+
+    document.getElementById('pendapatan-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevents form from submitting the normal way
+
+        const data = {
+            amount: document.getElementById('amount').value,
+            date: document.getElementById('date').value,
+            description: document.getElementById('description').value,
+            category: document.getElementById('category').value,
+        };
+
+        fetch('/api/income', {  // Using the existing backend API
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(() => {
+            window.location.href = '/pendapatan';  // Redirect to pengeluaran page after successful submission
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
 
     function editIncome(id) {
         currentId = id;

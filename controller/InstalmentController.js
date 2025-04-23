@@ -18,21 +18,13 @@ export const createInstalment = async (req, res) => {
   }
 };
 
-export const getInstalmentsByAccount = async (req, res) => {
+export const getInstalmentById = async (req, res) => {
   try {
-    const instalments = await Instalment.find({ account: req.params.id });
-    res.status(200).json({ instalments });
-    const accountExists = await Account.findById(account);
-    if (!accountExists) {
-      return res.status(400).json({ message: 'Account not found' });
+    const instalment = await Instalment.findById(req.params.id);
+    if (!instalment) {
+      return res.status(404).json({ message: 'Instalment not found' });
     }
-    if (!instalments) {
-      return res.status(400).json({ message: 'No instalments found' });
-    }
-    if(!account) {
-      return res.status(400).json({ message: 'Account not found' });
-    }
-    res.status(200).json({ instalments });
+    res.status(200).json({ instalment });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -61,7 +53,7 @@ export const updateInstalment = async (req, res) => {
 export const deleteInstalment = async (req, res) => {
   try {
     const instalment = await Instalment.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Instalment deleted successfully', instalment });
+    const account = req.cookies.user;
     const accountExists = await Account.findById(account);
     if (!accountExists) {
       return res.status(400).json({ message: 'Account not found' });
@@ -69,9 +61,7 @@ export const deleteInstalment = async (req, res) => {
     if (!instalment) {
       return res.status(400).json({ message: 'Instalment not found' });
     }
-    if (!account) {
-      return res.status(400).json({ message: 'Account not found' });
-    }
+    res.status(200).json({ message: 'Instalment deleted successfully', instalment });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

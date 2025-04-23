@@ -5,6 +5,7 @@
     <%- include('../partials/head'); %>
     <style>
         .menu-button {
+<<<<<<< HEAD
             position: absolute;
             top: 20px;
             right: 20px;
@@ -31,6 +32,33 @@
             text-decoration: none;
             transition: 0.3s ease;
         }
+=======
+        position: absolute;
+        top: 20px;
+        right: 57px;
+        padding: 10px 20px;
+        background-color: #258062;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s ease;
+    }
+        .logout-button {
+        position: absolute;
+        top: 20px;
+        right: 180px;
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s ease;
+    }
+>>>>>>> b06551ebeb7400ba105f24f17fc841f16bc956ac
     </style>
 </head>
 
@@ -38,7 +66,7 @@
     <div class="container mt-5">
         <h3>Pencatatan Cicilan</h3>
 
-        <a href="/menu" class="menu-button"> MENU </a>
+        <a href="/menu" class="menu-button"> <i class="fas fa-list"></i> Menu </a>
         <a href="/api/logout" class="logout-button">
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>

@@ -13,14 +13,14 @@ import { deleteInvoice } from '../controller/InvoiceController.js';
 // import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
 //expenditure route
-import { createExpenditure } from '../controller/ExpenditureController.js';
+import { createExpenditure, getExpenditureById} from '../controller/ExpenditureController.js';
 import { updateExpenditure } from '../controller/ExpenditureController.js';
 import { deleteExpenditure } from '../controller/ExpenditureController.js';
-import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
+// import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
 //installment route
 import { createInstalment } from '../controller/InstalmentController.js';
-import { getInstalmentsByAccount } from '../controller/InstalmentController.js';
+// import { getInstalmentsByAccount } from '../controller/InstalmentController.js';
 import { updateInstalment } from '../controller/InstalmentController.js';
 import { deleteInstalment } from '../controller/InstalmentController.js';
 
@@ -49,7 +49,7 @@ router.delete('/invoice/:id', authenticate, deleteInvoice);
 
 //Expenditure routes
 router.post('/expenditure', authenticate, createExpenditure);
-router.get('/expenditure/:id', authenticate, getExpendituresByAccount);
+router.get('/expenditure/:id', authenticate, getExpenditureById);
 router.put('/expenditure/:id', authenticate, updateExpenditure);
 router.delete('/expenditure/:id', authenticate, deleteExpenditure);
 

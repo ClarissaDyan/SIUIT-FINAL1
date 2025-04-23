@@ -9,38 +9,36 @@
     <div class="container mt-5">
         <h3>Pencatatan Cicilan</h3>
 
-        <!-- Form Input Cicilan-->
+        <!-- Form Input Cicilan -->
         <div class="card mb-4">
             <div class="card-header">
                 Tambah Cicilan
             </div>
             <div class="card-body">
-                <form id="cicilan-form" action="/api/instalment" method="POST">
-                    <input type="hidden" id="cicilan-id" name="id">
+                <form id="cicilan-form">
                     <div class="row">
                         <div class="col-md-3">
                             <label for="name" class="form-label">Nama Cicilan</label>
-                            <input type="text" class="form-control" name="name" min="0" required>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="col-md-3">
                             <label for="tenor" class="form-label">Tenor</label>
-                            <input type="number" class="form-control" name="tenor" min="0" required>
+                            <input type="number" class="form-control" id="tenor" name="tenor" required>
                         </div>
                         <div class="col-md-3">
                             <label for="amount" class="form-label">Jumlah Cicilan per Bulan</label>
-                            <input type="number" class="form-control" name="amount" min="0" required>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                         <div class="col-md-3">
                             <label for="date" class="form-label">Tanggal Jatuh Tempo</label>
-                            <input type="date" class="form-control" name="date" required>
+                            <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">
-                        Simpan
-                    </button>
+                    <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                 </form>
             </div>
         </div>
+
     
    <!-- Filter Data -->
     <div class="card mb-4">
@@ -151,7 +149,34 @@
 <!-- JavaScript untuk Edit dan Delete -->
 <script>
     let currentId = '';
+     
+    //fungsi untuk menambah cicilan
+    document.getElementById('cicilan-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevents form from submitting the normal way
 
+        const data = {
+            name: document.getElementById('name').value,
+            tenor: document.getElementById('tenor').value,
+            amount: document.getElementById('amount').value,
+            date: document.getElementById('date').value,
+        };
+
+        fetch('/api/instalment', {  // Using the existing backend API for cicilan
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(() => {
+            window.location.href = '/cicilan';  // Redirect to cicilan page after successful submission
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    
     function editInstalment(id) {
         currentId = id;
         fetch(`/api/instalment/${id}`)

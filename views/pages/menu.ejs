@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head'); %>
+    <style>
+      .menu-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .menu-button {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        border: none;
+        border-radius: 8px;
+        background-color: #1F5A48;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s ease;
+      }
+
+      .menu-button:hover {
+        background-color: #258062;
+        transform: translateY(-2px);
+      }
+
+      .logout-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s ease;
+      }
+
+      .logout-button:hover {
+        background-color: #c82333;
+      }
+
+      .welcome-text {
+        margin-bottom: 30px;
+        text-align: center;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Tombol Logout -->
+    <a href="/api/logout" class="logout-button">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+
+    <!-- Welcome Message -->
+    <div class="welcome-text">
+      <h2>Selamat Datang di SIUIT</h2>
+      <p>Pilih menu di bawah ini untuk mengelola keuangan Anda</p>
+    </div>
+
+    <!-- Menu Buttons -->
+    <div class="menu-container">
+      <div class="button-group">
+        <a href="/pendapatan" class="menu-button">
+          <i class="fas fa-money-bill-wave"></i> Pendapatan
+        </a>
+        <a href="/pengeluaran" class="menu-button">
+          <i class="fas fa-shopping-cart"></i> Pengeluaran
+        </a>
+        <a href="/cicilan" class="menu-button">
+          <i class="fas fa-clock"></i> Cicilan
+        </a>
+        <a href="/tagihan" class="menu-button">
+          <i class="fas fa-file-invoice"></i> Tagihan
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <%- include('../partials/footer.ejs'); %>
+  </footer>
+
+  <!-- Tambahkan Font Awesome untuk ikon -->
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

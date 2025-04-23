@@ -18,6 +18,12 @@ import { updateExpenditure } from '../controller/ExpenditureController.js';
 import { deleteExpenditure } from '../controller/ExpenditureController.js';
 import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
+//installment route
+import { createInstalment } from '../controller/InstalmentController.js';
+import { getInstalmentsByAccount } from '../controller/InstalmentController.js';
+import { updateInstalment } from '../controller/InstalmentController.js';
+import { deleteInstalment } from '../controller/InstalmentController.js';
+
 const router = express.Router();
 
 // Public routes account
@@ -41,10 +47,16 @@ router.get('/invoice/:id', authenticate, getInvoiceById);
 router.put('/invoice/:id', authenticate, updateInvoice);
 router.delete('/invoice/:id', authenticate, deleteInvoice);
 
-//expenditure routes
+//Expenditure routes
 router.post('/expenditure', authenticate, createExpenditure);
 router.get('/expenditure/:id', authenticate, getExpendituresByAccount);
 router.put('/expenditure/:id', authenticate, updateExpenditure);
 router.delete('/expenditure/:id', authenticate, deleteExpenditure);
+
+//instalment routes
+router.post('/instalment', authenticate, createInstalment);
+router.get('/instalment/:id', authenticate, getInstalmentsByAccount);
+router.put('/instalment/:id', authenticate, updateInstalment);
+router.delete('/instalment/:id', authenticate, deleteInstalment);
 
 export default router;

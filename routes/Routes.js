@@ -19,7 +19,7 @@ import { deleteExpenditure } from '../controller/ExpenditureController.js';
 // import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
 //installment route
-import { createInstalment } from '../controller/InstalmentController.js';
+import { createInstalment, getInstalmentById } from '../controller/InstalmentController.js';
 // import { getInstalmentsByAccount } from '../controller/InstalmentController.js';
 import { updateInstalment } from '../controller/InstalmentController.js';
 import { deleteInstalment } from '../controller/InstalmentController.js';
@@ -55,7 +55,7 @@ router.delete('/expenditure/:id', authenticate, deleteExpenditure);
 
 //instalment routes
 router.post('/instalment', authenticate, createInstalment);
-// router.get('/instalment/:id', authenticate, getInstalmentsByAccount);
+router.get('/instalment/:id', authenticate, getInstalmentById);
 router.put('/instalment/:id', authenticate, updateInstalment);
 router.delete('/instalment/:id', authenticate, deleteInstalment);
 

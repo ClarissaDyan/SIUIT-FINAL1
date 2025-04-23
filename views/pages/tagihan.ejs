@@ -32,19 +32,19 @@
                 Tambah Tagihan Bulan Ini
             </div>
             <div class="card-body">
-                <form id="tagihan-formaction=" action ="/api/invoice" method="POST">
+                <form id="tagihan-form">
                     <div class="row">
                         <div class="col-md-3">
                             <label for="nama" class="form-label">Nama Tagihan</label>
-                            <input type="text" class="form-control"name="name" required>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="col-md-3">
                             <label for="jumlah" class="form-label">Jumlah Tagihan</label>
-                            <input type="number" class="form-control"name="amount" required>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                         <div class="col-md-3">
                             <label for="tanggal" class="form-label">Tanggal Jatuh Tempo</label>
-                            <input type="date" class="form-control"name="date" required>
+                            <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">
@@ -154,6 +154,31 @@
 <!-- JavaScript untuk Edit dan Delete -->
 <script>
     let currentId = '';
+
+    document.getElementById('tagihan-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevents form from submitting the normal way
+
+        const data = {
+            name: document.getElementById('name').value,
+            amount: document.getElementById('amount').value,
+            date: document.getElementById('date').value,
+        };
+
+        fetch('/api/invoice', {  // Using the existing backend API
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(() => {
+            window.location.href = '/tagihan';  // Redirect to tagihan page after successful submission
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
 
     function editInvoice(id) {
         currentId = id;

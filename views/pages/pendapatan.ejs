@@ -28,10 +28,17 @@
                         <div class="col-md-3">
                             <label for="description" class="form-label">Deskripsi</label>
                             <input type="text" class="form-control" name="description" required>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="category" class="form-label">Kategori</label>
-                            <input type="text" class="form-control" name="category" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="category" class="form-label">Kategori</label>
+                                <select class="form-select" name="category" required>
+                                <option value="" disabled selected>Pilih Kategori</option>
+                                <option value="makanan">Makanan</option>
+                                <option value="transportasi">Transportasi</option>
+                                <option value="hiburan">Hiburan</option>
+                                <option value="tagihan">Tagihan</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3">Simpan</button>
@@ -48,11 +55,25 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
-                        <form action="/filter" method="GET" class="d-flex mb-4">
-                            <input type="date" name="startDate" class="form-control me-2" required>
-                            <input type="date" name="endDate" class="form-control me-2" required>
-                            <button type="submit" class="btn btn-primary">Cari</button>
-                        </form>
+                        <div class="d-flex mb-3">
+                            <input type="date" id="filter-startDate" class="form-control me-2" required>
+                            <input type="date" id="filter-endDate" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="filter-kategori" class="form-label">Kategori</label>
+                        <select id="filter-kategori" class="form-select">
+                            <option value="semua" selected>Semua Kategori</option>
+                            <option value="makanan">Makanan</option>
+                            <option value="transportasi">Transportasi</option>
+                            <option value="hiburan">Hiburan</option>
+                            <option value="tagihan">Tagihan</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary" onclick="filterIncome()">Cari</button>
+                        <button type="button" class="btn btn-secondary ms-2" onclick="resetIncome()">Reset</button>
                     </div>
                 </div>
             </div>
@@ -192,6 +213,42 @@
                 });
         }
     }
+
+    function filterIncome() {
+        const startDate = document.getElementById('filter-startDate').value;
+        const endDate = document.getElementById('filter-endDate').value;
+        const category = document.getElementById('filter-kategori').value;
+
+        const rows = document.querySelectorAll('table tbody tr');
+        rows.forEach(row => {
+            const date = row.children[3].innerText.trim(); // Format: dd/mm/yyyy
+            const categoryText = row.children[2].innerText.trim().toLowerCase();
+
+            const [day, month, year] = date.split('/');
+            const rowDate = new Date(`${year}-${month}-${day}`);
+
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            const isWithinDate = rowDate >= start && rowDate <= end;
+            const isCategoryMatch = (category === 'semua') || (categoryText === category.toLowerCase());
+
+            if (isWithinDate && isCategoryMatch) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    function resetIncome() {
+        document.getElementById('filter-startDate').value = '';
+        document.getElementById('filter-endDate').value = '';
+        document.getElementById('filter-kategori').value = 'semua';
+
+        const rows = document.querySelectorAll('table tbody tr');
+        rows.forEach(row => row.style.display = '');
+    }
+
 </script>
 </body>
 

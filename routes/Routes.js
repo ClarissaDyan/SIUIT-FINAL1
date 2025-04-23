@@ -55,7 +55,7 @@ router.delete('/expenditure/:id', authenticate, deleteExpenditure);
 
 //instalment routes
 router.post('/instalment', authenticate, createInstalment);
-router.get('/instalment/:id', authenticate, getInstalmentsByAccount);
+// router.get('/instalment/:id', authenticate, getInstalmentsByAccount);
 router.put('/instalment/:id', authenticate, updateInstalment);
 router.delete('/instalment/:id', authenticate, deleteInstalment);
 

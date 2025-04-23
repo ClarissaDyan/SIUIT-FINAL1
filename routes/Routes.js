@@ -4,12 +4,12 @@ import { createIncome, getIncomeById } from '../controller/IncomeController.js';
 
 const router = express.Router();
 
-// Public routes
+// Public routes account
 router.post('/register', registerAccount);
 router.post('/login', loginAccount);
 router.get('/logout', logoutAccount);
 
-// Protected routes
+// Protected routes accoumt
 router.put('/update/:id', authenticate, updateAccount);
 router.delete('/delete/:id', authenticate, deleteAccount);
 

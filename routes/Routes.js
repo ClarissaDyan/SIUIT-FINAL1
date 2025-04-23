@@ -12,7 +12,7 @@ import { updateInvoice } from '../controller/InvoiceController.js';
 import { deleteInvoice } from '../controller/InvoiceController.js';
 // import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
-//invoice expenditure
+//expenditure route
 import { createExpenditure } from '../controller/ExpenditureController.js';
 import { updateExpenditure } from '../controller/ExpenditureController.js';
 import { deleteExpenditure } from '../controller/ExpenditureController.js';

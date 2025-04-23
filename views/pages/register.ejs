@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
     <%- include('../partials/head'); %>
         <style>
             body {
@@ -107,6 +109,33 @@
             </form redirect>
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  window.onload = function () {
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+
+    if (error === 'notmatch') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: 'Password and confirm password do not match.',
+      });
+    } else if (error === 'exists') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: 'User with this email or username already exists.',
+      });
+    } else if (error === 'server') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: 'Internal server error. Please try again later.',
+      });
+    }
+  };
+</script>
 </body>
 
 </html>

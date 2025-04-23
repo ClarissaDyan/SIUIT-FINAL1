@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <%- include('../partials/head'); %>
         <style>
             body {
@@ -98,6 +99,27 @@
             </form>
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  window.onload = function () {
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+
+    if (error === 'wrongPassword') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: 'Wrong Password.',
+      });
+    } else if (error === 'UserNotFound') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: 'User Not Found',
+      });
+    }
+  };
+</script>
 </body>
 
 </html>

@@ -36,7 +36,7 @@ app.use(express.static("public"));
 
 // Public routes (tidak perlu login)
 app.get('/', redirectIfAuthenticated, function(req, res) {
-    res.render('pages/index');
+    res.render('pages/home');
 });
 
 app.get('/login', redirectIfAuthenticated, function(req, res) {

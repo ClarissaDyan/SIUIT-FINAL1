@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <main>
+        <div class="hero">
+            <div class="hero-text">
+                <h1>Selamat datang di</h1>
+                <h3>SIUIT</h3>
+
+                <div class="button-container">
+                    <button onclick="window.location.href='/login'">Masuk</button>
+                    <button onclick="window.location.href='/register'">Daftar</button>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="/images/suitt.png" alt="robot icon">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+
+</html>

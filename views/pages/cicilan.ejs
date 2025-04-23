@@ -114,6 +114,57 @@
 <footer>
     <%- include('../partials/footer.ejs'); %>
 </footer>
+
+<!-- JavaScript untuk Edit dan Delete -->
+<script>
+    let currentId = '';
+
+    function editIncome(id) {
+        currentId = id;
+        fetch(`/api/income/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('edit-id').value = data.income._id;
+                document.getElementById('edit-amount').value = data.income.amount;
+                document.getElementById('edit-date').value = data.income.date.split('T')[0];
+                document.getElementById('edit-description').value = data.income.description;
+                document.getElementById('edit-category').value = data.income.category;
+                new bootstrap.Modal(document.getElementById('editModal')).show();
+            });
+    }
+
+    function updateIncome() {
+        const data = {
+            amount: document.getElementById('edit-amount').value,
+            date: document.getElementById('edit-date').value,
+            description: document.getElementById('edit-description').value,
+            category: document.getElementById('edit-category').value
+        };
+
+        fetch(`/api/income/${currentId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(() => {
+                window.location.reload();
+            });
+    }
+
+    function deleteIncome(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+            fetch(`/api/income/${id}`, {
+                method: 'DELETE'
+            })
+                .then(() => {
+                    window.location.reload();
+                });
+        }
+    }
+</script>
 </body>
 
 </html>

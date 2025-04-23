@@ -1,5 +1,7 @@
 import express from 'express';
 import { registerAccount, loginAccount, updateAccount, deleteAccount, authenticate, logoutAccount } from '../controller/AccountController.js';
+
+//income route
 import { createIncome, getIncomeById } from '../controller/IncomeController.js';
 import { updateIncome } from '../controller/IncomeController.js';
 import { deleteIncome } from '../controller/IncomeController.js';
@@ -26,6 +28,12 @@ router.get('/logout', logoutAccount);
 // Protected routes account
 router.put('/update/:id', authenticate, updateAccount);
 router.delete('/delete/:id', authenticate, deleteAccount);
+
+// Income routes
+router.post('/income', authenticate, createIncome);
+router.get('/income/:id', authenticate, getIncomeById);
+router.put('/income/:id', authenticate, updateIncome);
+router.delete('/income/:id', authenticate, deleteIncome);
 
 // Invoice routes
 router.post('/invoice', authenticate, createInvoice);

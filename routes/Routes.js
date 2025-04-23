@@ -10,17 +10,14 @@ import { deleteIncome } from '../controller/IncomeController.js';
 import { createInvoice, getInvoiceById } from '../controller/InvoiceController.js';
 import { updateInvoice } from '../controller/InvoiceController.js';
 import { deleteInvoice } from '../controller/InvoiceController.js';
-// import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
 //expenditure route
 import { createExpenditure, getExpenditureById} from '../controller/ExpenditureController.js';
 import { updateExpenditure } from '../controller/ExpenditureController.js';
 import { deleteExpenditure } from '../controller/ExpenditureController.js';
-// import { getExpendituresByAccount } from '../controller/ExpenditureController.js';
 
 //installment route
 import { createInstalment, getInstalmentById } from '../controller/InstalmentController.js';
-// import { getInstalmentsByAccount } from '../controller/InstalmentController.js';
 import { updateInstalment } from '../controller/InstalmentController.js';
 import { deleteInstalment } from '../controller/InstalmentController.js';
 

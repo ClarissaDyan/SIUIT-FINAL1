@@ -9,29 +9,29 @@
     <div class="container mt-5">
         <h3>Manajemen Pengeluaran</h3>
 
-        <!-- Form Input Pengeluaran -->
+    <!-- Form Input Pengeluaran -->
         <div class="card mb-4">
             <div class="card-header">
                 Tambah Pengeluaran Baru
             </div>
             <div class="card-body">
-                <form id="pengeluaran-form" action="/api/expenditure" method="POST">
+                <form id="pengeluaran-form">
                     <div class="row">
                         <div class="col-md-3">
                             <label for="amount" class="form-label">Jumlah Pengeluaran</label>
-                            <input type="number" class="form-control" name="amount" required>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                         <div class="col-md-3">
                             <label for="date" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" name="date" required>
+                            <input type="date" class="form-control" id="date" name="date" required>
                         </div>
                         <div class="col-md-3">
                             <label for="description" class="form-label">Deskripsi</label>
-                            <input type="text" class="form-control" name="description" required>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="category" class="form-label">Kategori</label>
-                                <select class="form-select" name="category" required>
+                            <input type="text" class="form-control" id="description" name="description" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="category" class="form-label">Kategori</label>
+                            <select class="form-select" id="category" name="category" required>
                                 <option value="" disabled selected>Pilih Kategori</option>
                                 <option value="makanan">Makanan</option>
                                 <option value="transportasi">Transportasi</option>
@@ -46,38 +46,38 @@
             </div>
         </div>
 
-      <!-- Filter Data -->
-<div class="card mb-4">
-    <div class="card-header">
-        Filter Data
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-6">
-                <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
-                <div class="d-flex mb-3">
-                    <input type="date" id="filter-startDate" class="form-control me-2" required>
-                    <input type="date" id="filter-endDate" class="form-control" required>
+    <!-- Filter Data -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Filter Data
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
+                        <div class="d-flex mb-3">
+                            <input type="date" id="filter-startDate" class="form-control me-2" required>
+                            <input type="date" id="filter-endDate" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="filter-kategori" class="form-label">Kategori</label>
+                        <select id="filter-kategori" class="form-select">
+                            <option value="semua" selected>Semua Kategori</option>
+                            <option value="makanan">Makanan</option>
+                            <option value="transportasi">Transportasi</option>
+                            <option value="hiburan">Hiburan</option>
+                            <option value="tagihan">Tagihan</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="button" class="btn btn-primary" onclick="filterExpenditures()">Cari</button>
+                        <button type="button" class="btn btn-secondary ms-2" onclick="resetFilter()">Reset</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <label for="filter-kategori" class="form-label">Kategori</label>
-                <select id="filter-kategori" class="form-select">
-                    <option value="semua" selected>Semua Kategori</option>
-                    <option value="makanan">Makanan</option>
-                    <option value="transportasi">Transportasi</option>
-                    <option value="hiburan">Hiburan</option>
-                    <option value="tagihan">Tagihan</option>
-                    <option value="lainnya">Lainnya</option>
-                </select>
-            </div>
-            <div class="col-md-3 d-flex align-items-end">
-                <button type="button" class="btn btn-primary" onclick="filterExpenditures()">Cari</button>
-                <button type="button" class="btn btn-secondary ms-2" onclick="resetFilter()">Reset</button>
-            </div>
         </div>
-    </div>
-</div>
 
 
         <!-- Tabel Daftar Pengeluaran -->
@@ -168,8 +168,35 @@
 
     <!-- JavaScript untuk Edit dan Delete -->
 <script>
+
     let currentId = '';
 
+    document.getElementById('pengeluaran-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevents form from submitting the normal way
+
+        const data = {
+            amount: document.getElementById('amount').value,
+            date: document.getElementById('date').value,
+            description: document.getElementById('description').value,
+            category: document.getElementById('category').value,
+        };
+
+        fetch('/api/expenditure', {  // Using the existing backend API
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(() => {
+            window.location.href = '/pengeluaran';  // Redirect to pengeluaran page after successful submission
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    
     function editExpenditure(id) {
         currentId = id;
         fetch(`/api/expenditure/${id}`)

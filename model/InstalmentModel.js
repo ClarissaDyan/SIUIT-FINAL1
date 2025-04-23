@@ -4,7 +4,7 @@ const instalmentSchema = new mongoose.Schema({
   name: { type: String, required: true },
   amount: { type: Number, required: true },
   tenor: { type: Number, required: true },
-  date: { type: Date, required: true },
+  date: { type: Number, required: true }, 
   account: { type: mongoose.Schema.Types.ObjectId, ref: 'Account', required: true },
 });
 

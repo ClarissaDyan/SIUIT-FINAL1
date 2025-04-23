@@ -3,11 +3,28 @@
 
 <head>
     <%- include('../partials/head'); %>
+    <style>
+        .menu-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background-color: #258062;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.3s ease;
+      }
+    </style>
 </head>
 
 <body>
     <div class="container mt-5">
         <h3>Manajemen Pendapatan</h3>
+
+        <a href="/menu" class="menu-button"> MENU </a>
 
         <!-- Form Input Pendapatan -->
         <div class="card mb-4">

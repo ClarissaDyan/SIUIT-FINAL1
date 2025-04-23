@@ -33,3 +33,42 @@ export const getIncomeById = async (req, res) => {
     }
 };
 
+export const updateIncome = async (req, res) => {
+    try {
+      const { amount, date, description, category } = req.body;
+      const account = req.cookies.user;
+      
+      const income = await Income.findByIdAndUpdate(
+        req.params.id,
+        { amount, date, description, category, account },
+        { new: true }
+      );
+      
+      if (!income) {
+        return res.status(404).json({ message: 'Income not found' });
+      }
+      
+      res.status(200).json({ message: 'Income updated successfully', income });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+  export const deleteIncome = async (req, res) => {
+    try {
+      const income = await Income.findByIdAndDelete(req.params.id);
+      if (!income) {
+        return res.status(400).json({ message: 'Income not found' });
+      }
+  
+      const accountExists = await Account.findById(income.account);
+      if (!accountExists) {
+        return res.status(400).json({ message: 'Account not found' });
+      }
+  
+      res.status(200).json({ message: 'Income deleted successfully', income });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+

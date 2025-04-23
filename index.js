@@ -6,7 +6,7 @@ import Routes from './routes/Routes.js';
 import cookieParser from 'cookie-parser';
 // import Instalment from './model/InstalmentModel.js';
 // import Expenditure from './model/ExpenditureModel.js';
-// import Income from './model/IncomeModel.js';
+import Income from './model/IncomeModel.js';
 import { authenticate, redirectIfAuthenticated } from './controller/AccountController.js';
 
 const app = express();

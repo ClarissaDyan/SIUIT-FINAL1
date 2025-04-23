@@ -20,25 +20,25 @@ export const createInvoice = async (req, res) => {
   }
 };
 
-export const getInvoicesByAccount = async (req, res) => {
-  try {
-    const accountExists = await Account.findById(account);
-    if (!accountExists) {
-      return res.status(400).json({ message: 'Account not found' });
-    }
+// export const getInvoicesByAccount = async (req, res) => {
+//   try {
+//     const accountExists = await Account.findById(account);
+//     if (!accountExists) {
+//       return res.status(400).json({ message: 'Account not found' });
+//     }
 
-    // dapatkan semua income berdasarkan akun
-    const invoices = await Invoice.find({ account: req.params.id});
+//     // dapatkan semua income berdasarkan akun
+//     const invoices = await Invoice.find({ account: req.params.id});
 
-    if (!invoices) {
-      return res.status(400).json({ message: 'No invoices found' });
-    }
+//     if (!invoices) {
+//       return res.status(400).json({ message: 'No invoices found' });
+//     }
     
-    res.status(200).json({ invoices });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+//     res.status(200).json({ invoices });
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 export const getInvoiceById = async (req, res) => {
     try {

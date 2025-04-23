@@ -93,24 +93,28 @@
                                 <th>Tanggal</th>
                             </tr>
                         </thead>
-                        <!-- <tbody>
-                                                                            <% expenditures.forEach(expenditure=> { %>
-                                                                                <tr>
-                                    <td>
-                                        <%= expenditure.description %>
-                                    </td>
-                                    <td>
-                                        <%= expenditure.amount %>
-                                    </td>
-                                    <td>
-                                        <%= expenditure.category %>
-                                    </td>
-                                    <td>
-                                        <%= expenditure.date.toDateString() %>
-                                    </td>
-                                    </tr>
+                        <tbody>
+                            <% expenditures.forEach(expenditure=> { %>
+                            <tr>
+                                <td>
+                                    <%= expenditure.description %>
+                                </td>
+                                <td>
+                                    <%= expenditure.amount %>
+                                </td>
+                                <td>
+                                    <%= expenditure.category %>
+                                </td>
+                                <td>
+                                    <%= expenditure.date.toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm" onclick="editExpenditure('<%= expenditure._id %>')">Edit</button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteExpenditure('<%= expenditure._id %>')">Hapus</button>
+                                </td>
+                            </tr>
                             <% }) %>
-                                </tbody> -->
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -118,7 +122,7 @@
     </div>
 
     <footer>
-        <%- include('../partials/footer copy.ejs'); %>
+        <%- include('../partials/footer.ejs'); %>
     </footer>
 </body>
 

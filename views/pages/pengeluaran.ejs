@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h3>Manajemen Pengeluaran</h3>
+
+        <!-- Form Input Pengeluaran -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Tambah Pengeluaran Baru
+            </div>
+            <div class="card-body">
+                <form id="pengeluaran-form" action="/api/expenditure" method="POST">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="amount" class="form-label">Jumlah Pengeluaran</label>
+                            <input type="number" class="form-control" name="amount" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="date" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control" name="date" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="description" class="form-label">Deskripsi</label>
+                            <input type="text" class="form-control" name="description" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="category" class="form-label">Kategori</label>
+                                <select class="form-select" name="category" required>
+                                <option value="" disabled selected>Pilih Kategori</option>
+                                <option value="makanan">Makanan</option>
+                                <option value="transportasi">Transportasi</option>
+                                <option value="hiburan">Hiburan</option>
+                                <option value="tagihan">Tagihan</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Filter Data -->
+        <div class="card mb-4">
+            <div class="card-header">
+                Filter Data
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="filter-tanggal" class="form-label">Tanggal Awal - Tanggal Akhir</label>
+                        <form action="/filter" method="GET" class="d-flex mb-4">
+                            <input type="date" name="startDate" class="form-control me-2" required>
+                            <input type="date" name="endDate" class="form-control me-2" required>
+                        </form>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="filter-kategori" class="form-label">Kategori</label>
+                        <select id="filter-kategori" class="form-select">
+                            <option value="" disabled selected>Pilih Kategori</option>
+                            <option value="semua">Semua Kategori</option>
+                            <option value="makanan">Makanan</option>
+                            <option value="transportasi">Transportasi</option>
+                            <option value="hiburan">Hiburan</option>
+                            <option value="tagihan bulanan">Tagihan Bulanan</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </div>
+    
+        <!-- Tabel Daftar Pengeluaran -->
+        <div class="card">
+            <div class="card-header">
+                Daftar Pengeluaran
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Sumber Pengeluaran</th>
+                                <th>Jumlah Pengeluaran</th>
+                                <th>Kategori</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+                        <!-- <tbody>
+                                                                            <% expenditures.forEach(expenditure=> { %>
+                                                                                <tr>
+                                    <td>
+                                        <%= expenditure.description %>
+                                    </td>
+                                    <td>
+                                        <%= expenditure.amount %>
+                                    </td>
+                                    <td>
+                                        <%= expenditure.category %>
+                                    </td>
+                                    <td>
+                                        <%= expenditure.date.toDateString() %>
+                                    </td>
+                                    </tr>
+                            <% }) %>
+                                </tbody> -->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <%- include('../partials/footer copy.ejs'); %>
+    </footer>
+</body>
+
+</html>

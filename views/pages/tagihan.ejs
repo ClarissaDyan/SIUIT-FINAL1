@@ -109,7 +109,7 @@
                     <input type="hidden" id="edit-id">
                     <div class="mb-3">
                         <label class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="edit-nama" required>
+                        <input type="text" class="form-control" id="edit-name" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jumlah</label>
@@ -145,7 +145,7 @@
                 document.getElementById('edit-id').value = data.invoice._id;
                 document.getElementById('edit-name').value = data.invoice.name;
                 document.getElementById('edit-amount').value = data.invoice.amount;
-                document.getElementById('edit-date').value = data.invoicee.date.split('T')[0];
+                document.getElementById('edit-date').value = data.invoice.date.split('T')[0];
                 new bootstrap.Modal(document.getElementById('editModal')).show();
             });
     }

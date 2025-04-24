@@ -1,9 +1,12 @@
+//list npm packages
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import Routes from './routes/Routes.js';
 import cookieParser from 'cookie-parser';
+
+//import model 
 import Instalment from './model/InstalmentModel.js';
 import Expenditure from './model/ExpenditureModel.js';
 import Income from './model/IncomeModel.js';
@@ -18,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+//Connect ke mongodb lewat env agar lebih secure
 const PORT = process.env.PORT || 8000;
 const MONGOURL = process.env.MONGOURL;
 
@@ -29,6 +33,7 @@ mongoose.connect(MONGOURL).then(() => {
 }).catch((err) => {
   console.log(err);
 });
+
 
 app.use('/api', Routes);
 app.set('view engine', 'ejs');

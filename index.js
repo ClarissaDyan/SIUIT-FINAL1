@@ -1,9 +1,12 @@
+//list npm packages
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import Routes from './routes/Routes.js';
 import cookieParser from 'cookie-parser';
+
+//import model 
 import Instalment from './model/InstalmentModel.js';
 import Expenditure from './model/ExpenditureModel.js';
 import Income from './model/IncomeModel.js';
@@ -18,6 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+//Connect ke mongodb lewat env agar lebih secure
 const PORT = process.env.PORT || 8000;
 const MONGOURL = process.env.MONGOURL;
 
@@ -29,6 +33,7 @@ mongoose.connect(MONGOURL).then(() => {
 }).catch((err) => {
   console.log(err);
 });
+
 
 app.use('/api', Routes);
 app.set('view engine', 'ejs');
@@ -61,11 +66,20 @@ app.get('/pengeluaran', authenticate, async function(req, res) {
     }
 });
 
+//route untuk page pendapatan yang menampilkan data pemasukan
+//hanya bisa diakses unutk user yang sudah login 
 app.get('/pendapatan', authenticate, async function(req, res) {
     try {
+        /*mencari semua data pemasukan dari user yang sedang login
+        req.cookies.user berisi ID user yang disimpan di cookie*/
+
         const incomes = await Income.find({ account: req.cookies.user });
+        
+        //menampilkan page pendapatan dan mengirim data pendapatan
         res.render('pages/pendapatan', { incomes });
     } catch (error) {
+
+        //kalau terjadi error, user akan dialihkan ke page login
         res.redirect('/login');
     }
 });

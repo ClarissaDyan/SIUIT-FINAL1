@@ -61,11 +61,20 @@ app.get('/pengeluaran', authenticate, async function(req, res) {
     }
 });
 
+//route untuk page pendapatan yang menampilkan data pemasukan
+//hanya bisa diakses unutk user yang sudah login 
 app.get('/pendapatan', authenticate, async function(req, res) {
     try {
+        /*mencari semua data pemasukan dari user yang sedang login
+        req.cookies.user berisi ID user yang disimpan di cookie*/
+
         const incomes = await Income.find({ account: req.cookies.user });
+        
+        //menampilkan page pendapatan dan mengirim data pendapatan
         res.render('pages/pendapatan', { incomes });
     } catch (error) {
+
+        //kalau terjadi error, user akan dialihkan ke page login
         res.redirect('/login');
     }
 });

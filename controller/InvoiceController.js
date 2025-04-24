@@ -1,11 +1,14 @@
+// Import model Invoice dan Account
 import Invoice from '../model/InvoiceModel.js';
 import Account from '../model/AccountModel.js';
 
+// Fungsi untuk membuat invoice baru
 export const createInvoice = async (req, res) => {
   try {
     const { name, amount, date} = req.body;
+     // Ambil id akun dari cookies user
     const account = req.cookies.user;
-    // buat ngecek create
+    // membuat invoice baru
     const invoice = await Invoice.create({ name, amount, date, account });
    
     
@@ -14,34 +17,18 @@ export const createInvoice = async (req, res) => {
     if (!accountExists) {
       return res.status(400).json({ message: 'Account not found' });
     }
+    //message kalau sudah sucess membuat invoice
     res.status(201).json({ message: 'Invoice created successfully', invoice });
   } catch (error) {
+    //message error
     res.status(500).json({ message: error.message });
   }
 };
 
-// export const getInvoicesByAccount = async (req, res) => {
-//   try {
-//     const accountExists = await Account.findById(account);
-//     if (!accountExists) {
-//       return res.status(400).json({ message: 'Account not found' });
-//     }
-
-//     // dapatkan semua income berdasarkan akun
-//     const invoices = await Invoice.find({ account: req.params.id});
-
-//     if (!invoices) {
-//       return res.status(400).json({ message: 'No invoices found' });
-//     }
-    
-//     res.status(200).json({ invoices });
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
+// fungsi mengambil invoice dari id
 export const getInvoiceById = async (req, res) => {
     try {
+      //mencari incoive dengan id dari url
       const invoice = await Invoice.findById(req.params.id);
       if (!invoice) {
         return res.status(404).json({ message: 'Invoice not found' });
@@ -52,13 +39,16 @@ export const getInvoiceById = async (req, res) => {
     }
   };
 
+  //Fungsi mengupdate invoice berdasarkan id
 export const updateInvoice = async (req, res) => {
   try {
+    //ambil data
     const { name, amount, date} = req.body;
     const account = req.cookies.user;
 
+    //cari dan update invoice berdasarka idnya
     const invoice = await Invoice.findByIdAndUpdate(req.params.id, { name, amount, date, account },
-        {new: true}
+        {new: true}// return data terbaru
     );
 
    
@@ -72,8 +62,10 @@ export const updateInvoice = async (req, res) => {
   }
 };
 
+// Fungsi menghapus invoice 
 export const deleteInvoice = async (req, res) => {
   try {
+    // mencari dan menghapus invoice berdasarkan id
     const invoice = await Invoice.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: 'Invoice deleted successfully', invoice });
 

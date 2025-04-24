@@ -1,16 +1,19 @@
 import Instalment from '../model/InstalmentModel.js';
 import Account from '../model/AccountModel.js';
 
+//Fungsi untuk memasukkan data cicilan baru ke dalam database
 export const createInstalment = async (req, res) => {
   try {
     const { name, amount, tenor, date } = req.body;
     const account = req.cookies.user; // Get user ID from cookie
     
-    const accountExists = await Account.findById(account);
+    //memeriksa keberadaan akun
+    const accountExists = await Account.findById(account); //memeriksa keberadaan akun
     if (!accountExists) {
       return res.status(400).json({ message: 'Account not found' });
     }
     
+    //membuat data cicilan baru ke dalam database
     const instalment = await Instalment.create({ name, amount, tenor, date, account });
     res.status(201).json({ message: 'Instalment created successfully', instalment });
   } catch (error) {
@@ -18,6 +21,7 @@ export const createInstalment = async (req, res) => {
   }
 };
 
+//Fungsi untuk memilih cicilan berdasarkan id agar data user tidak muncul di tampilan daftar cicilan dengan id lain
 export const getInstalmentById = async (req, res) => {
   try {
     const instalment = await Instalment.findById(req.params.id);
@@ -30,6 +34,7 @@ export const getInstalmentById = async (req, res) => {
   }
 };
 
+//Fungsi untuk memperbarui data cicilan yang sudah pernah diinput user ke dalam database
 export const updateInstalment = async (req, res) => {
   try {
     const { name, amount, tenor, date, account } = req.body;
@@ -50,6 +55,7 @@ export const updateInstalment = async (req, res) => {
   }
 };
 
+//Fungsi untuk menghapus data cicilan yang sudah pernah diinput user ke dalam database
 export const deleteInstalment = async (req, res) => {
   try {
     const instalment = await Instalment.findByIdAndDelete(req.params.id);
